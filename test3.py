@@ -69,6 +69,7 @@ frame.append(255)
 frame.append()
 frame.append(239)
 
+print(frame)
 
 # while True:
     # Get amount of time elapsed since last update, then compute hue delta.
