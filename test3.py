@@ -49,20 +49,42 @@ hue = hue_min
 # Enter main loop.
 print("Press Ctrl-C to quit.")
 last = time.time()
-while True:
+# bytes[0] = 126;
+# bytes[1] = 4;
+# bytes[2] = 4;
+# bytes[3] = 1;
+# bytes[4] = 255;
+# bytes[5] = 255;
+# bytes[6] = 255;
+# //bytes[7] = NOT_SET;
+# bytes[8] = 239;
+frame = bytearray()
+frame.append(126)
+frame.append(4)
+frame.append(4)
+frame.append(1)
+frame.append(255)
+frame.append(255)
+frame.append(255)
+frame.append()
+frame.append(239)
+
+
+# while True:
     # Get amount of time elapsed since last update, then compute hue delta.
-    now = time.time()
-    hue_delta = (now - last) / CYCLE_SEC * (hue_max - hue_min)
-    hue += hue_delta
-    # If hue exceeds the maximum wrap back around to start from the minimum.
-    if hue > hue_max:
-        hue = hue_min + math.modf(hue)[0]
-    # Compute 24-bit RGB color based on HSV values.
-    r, g, b = map(lambda x: int(x * 255.0), colorsys.hsv_to_rgb(hue, SATURATION, VALUE))
-    # Set light color by sending color change packet over BLE.
-    gatt.sendline(
-        "char-write-cmd 0x0028 58010301ff00{0:02X}{1:02X}{2:02X}".format(r, g, b)
-    )
+    # now = time.time()
+    # hue_delta = (now - last) / CYCLE_SEC * (hue_max - hue_min)
+    # hue += hue_delta
+    # # If hue exceeds the maximum wrap back around to start from the minimum.
+    # if hue > hue_max:
+    #     hue = hue_min + math.modf(hue)[0]
+    # # Compute 24-bit RGB color based on HSV values.
+    # r, g, b = map(lambda x: int(x * 255.0), colorsys.hsv_to_rgb(hue, SATURATION, VALUE))
+    # # Set light color by sending color change packet over BLE.
+gatt.sendline(
+    frame
+    # "char-write-cmd 0x0028 58010301ff00{0:02X}{1:02X}{2:02X}".format(r, g, b)
+)
     # Wait a short period of time and setup for the next loop iteration.
-    time.sleep(SLEEP_SEC)
-    last = now
+    # time.sleep(SLEEP_SEC)
+    # last = now
