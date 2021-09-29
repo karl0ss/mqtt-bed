@@ -58,16 +58,18 @@ last = time.time()
 # bytes[6] = 255;
 # //bytes[7] = NOT_SET;
 # bytes[8] = 239;
-frame = bytearray()
-frame.append(126)
-frame.append(4)
-frame.append(4)
-frame.append(1)
-frame.append(255)
-frame.append(255)
-frame.append(255)
-frame.append()
-frame.append(239)
+
+on = [126,4,4,1,255,255,255,239]
+frame = bytearray(on)
+# frame.append(126)
+# frame.append(4)
+# frame.append(4)
+# frame.append(1)
+# frame.append(255)
+# frame.append(255)
+# frame.append(255)
+# # frame.append()
+# frame.append(239)
 
 print(frame)
 
